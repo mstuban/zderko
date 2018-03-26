@@ -1,0 +1,48 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.burger {
+    background-image: url("img/burger_background.png");
+    background-size: cover;
+    height: 500px;
+    color: white;
+}
+
+body > div.navbar.navbar-inverse.navbar-fixed-top {
+    background-color: #d43f3a;
+    color: white;
+}
+
+body > div.navbar.navbar-inverse.navbar-fixed-top a {
+    color: white;
+}
+
+body > div.navbar.navbar-inverse.navbar-fixed-top a:hover {
+    font-size: 16px;
+}
+
+body > div.navbar.navbar-inverse.navbar-fixed-top li:hover {
+    border-color: white;
+}
