@@ -32,7 +32,6 @@ textarea {
 
 body > div.navbar.navbar-inverse.navbar-fixed-top {
     background-color: #d43f3a;
-    color: white;
 }
 
 body > div.navbar.navbar-inverse.navbar-fixed-top a {
@@ -45,4 +44,107 @@ body > div.navbar.navbar-inverse.navbar-fixed-top a:hover {
 
 body > div.navbar.navbar-inverse.navbar-fixed-top li:hover {
     border-color: white;
+}
+
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+#map {
+    height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#description {
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+#infowindow-content .title {
+    font-weight: bold;
+}
+
+#infowindow-content {
+    display: none;
+}
+
+#map #infowindow-content {
+    display: inline;
+}
+
+#title {
+    color: #fff;
+    background-color: #4d90fe;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 6px 12px;
+}
+
+#target {
+    width: 345px;
+}
+
+#submitButtonWrapper{
+    width: 50%;
+}
+
+ul.dropdown-cart {
+    min-width: 250px;
+}
+
+    ul.dropdown-cart li .item {
+        display: block;
+        padding: 3px 10px;
+        margin: 3px 0;
+    }
+
+        ul.dropdown-cart li .item:hover {
+            background-color: #f3f3f3;
+            color: black;
+        }
+
+        ul.dropdown-cart li .item:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+
+    ul.dropdown-cart li .item-left {
+        float: left;
+    }
+
+        ul.dropdown-cart li .item-left img,
+        ul.dropdown-cart li .item-left span.item-info {
+            float: left;
+        }
+
+        ul.dropdown-cart li .item-left span.item-info {
+            margin-left: 10px;
+        }
+
+            ul.dropdown-cart li .item-left span.item-info span {
+                display: block;
+            }
+
+    ul.dropdown-cart li .item-right {
+        float: right;
+    }
+
+        ul.dropdown-cart li .item-right button {
+            margin-top: 14px;
+        }
+
+#finishOrderButton {
+    color: black;
+}
+
+#finishOrderButton:hover {
+    color: white;
 }

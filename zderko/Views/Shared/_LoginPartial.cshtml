@@ -5,12 +5,35 @@
     {
     @Html.AntiForgeryToken()
 
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    </li>
+    <li><a href="javascript:document.getElementById('logoutForm').submit()">Odjava</a></li>
     <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Pozdrav " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> () <span class="caret"></span></a>
+            <ul class="dropdown-menu dropdown-cart" role="menu">
+                <li>
+                    <span class="item">
+                        <span class="item-left">
+                            <img src="http://lorempixel.com/50/50/" alt="" />
+                            <span class="item-info">
+                                <span>Item name</span>
+                                <span>23$</span>
+                            </span>
+                        </span>
+                        <span class="item-right">
+                            <button class="btn btn-xs btn-danger pull-right">x</button>
+                        </span>
+                    </span>
+                </li>
+                <li class="divider"></li>
+                <li><a id="finishOrderButton" class="text-center" href="">Završi narudžbu</a></li>
+            </ul>
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Odjava</a></li>
     </ul>
+</ul>
     }
 }
 else

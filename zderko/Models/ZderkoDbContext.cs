@@ -19,5 +19,17 @@ namespace zderko.Models
             return new ZderkoDbContext();
         }
 
+        public DbSet<Restaurant> Restaurants { get; set; }
+
+        public DbSet<Dish> Dishes { get; set; }
+
+        public DbSet<Rating> Ratings { get; set; }
+
+        public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<MethodOfPayment> MethodsOfPayment { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
     }
 }

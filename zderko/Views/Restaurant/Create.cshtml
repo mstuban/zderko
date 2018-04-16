@@ -1,0 +1,24 @@
+﻿﻿﻿@model zderko.Models.Restaurant
+@{
+    ViewBag.Title = "Add new restaurant";
+}
+<h2>Dodaj novi restoran</h2>
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Pregled restorana", "Index")</li>
+    <li class="active">Kreiranje novog restorana</li>
+</ol>
+
+@using (Html.BeginForm())
+{
+    <text>
+        @Html.Partial("CreateOrEdit")
+    </text>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

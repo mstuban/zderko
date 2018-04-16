@@ -1,0 +1,40 @@
+﻿﻿﻿﻿﻿@model zderko.Models.Restaurant
+
+@{
+    ViewBag.Title = "Uredi restoran";
+}
+
+@if (@Model == null)
+{
+    <br/>
+    <span class="alert alert-danger">Niste vlasnik ovog restorana!</span>
+    @Html.ActionLink("Home", "Index", "Home")
+}
+else
+{
+
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("Pregled restorana", "Index")</li>
+        <li class="active">Uređivanje restorana @Model.Name</li>
+    </ol>
+
+    <h2>Uredi podatke o restoranu</h2>
+
+    using (Html.BeginForm())
+    {
+
+        <text>
+            @Html.Partial("CreateOrEdit")
+            @Html.HiddenFor(p => p.ID)
+        </text>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

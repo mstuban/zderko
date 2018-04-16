@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="C:\USERS\MSTUB\SOURCE\REPOS\ZDERKO\ZDERKO\APP_DATA\ZDERKO.MDF" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\USERS\MSTUB\SOURCE\REPOS\ZDERKO\ZDERKO\APP_DATA\ZDERKO.MDF;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="C__USERS_MSTUB_SOURCE_REPOS_ZDERKO_ZDERKO_APP_DATA_ZDERKO_MDFConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Addresses" Member="Addresses">
+    <Type Name="Address">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PostalCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Street" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="HouseNumber" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Restaurant_Address" Member="Restaurant" ThisKey="ID" OtherKey="ID" Type="Restaurant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetRoles" Member="AspNetRoles">
+    <Type Name="AspNetRole">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetRole_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="RoleId" Type="AspNetUserRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserClaims" Member="AspNetUserClaims">
+    <Type Name="AspNetUserClaim">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="ClaimType" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ClaimValue" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserLogins" Member="AspNetUserLogins">
+    <Type Name="AspNetUserLogin">
+      <Column Name="LoginProvider" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProviderKey" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserRoles" Member="AspNetUserRoles">
+    <Type Name="AspNetUserRole">
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="AspNetRole_AspNetUserRole" Member="AspNetRole" ThisKey="RoleId" OtherKey="Id" Type="AspNetRole" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
+    <Type Name="AspNetUser">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NameAndSurname" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="OIB" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumberConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TwoFactorEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LockoutEndDateUtc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
+      <Association Name="AspNetUser_Order" Member="Orders" ThisKey="Id" OtherKey="UserId" Type="Order" />
+      <Association Name="AspNetUser_Rating" Member="Ratings" ThisKey="Id" OtherKey="UserId" Type="Rating" />
+      <Association Name="AspNetUser_Restaurant" Member="Restaurants" ThisKey="Id" OtherKey="UserId" Type="Restaurant" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Dishes" Member="Dishes">
+    <Type Name="Dishe">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="RestaurantId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Dishe_OrderDishe" Member="OrderDishes" ThisKey="ID" OtherKey="Dish_ID" Type="OrderDishe" />
+      <Association Name="Dishe_Rating" Member="Ratings" ThisKey="ID" OtherKey="DishId" Type="Rating" />
+      <Association Name="Restaurant_Dishe" Member="Restaurant" ThisKey="RestaurantId" OtherKey="ID" Type="Restaurant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MethodOfPayments" Member="MethodOfPayments">
+    <Type Name="MethodOfPayment">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Value" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MethodOfPayment_Order" Member="Orders" ThisKey="ID" OtherKey="MethodOfPayment_ID" Type="Order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderDishes" Member="OrderDishes">
+    <Type Name="OrderDishe">
+      <Column Name="Order_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Dish_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Dishe_OrderDishe" Member="Dishe" ThisKey="Dish_ID" OtherKey="ID" Type="Dishe" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Order_OrderDishe" Member="Order" ThisKey="Order_ID" OtherKey="ID" Type="Order" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Orders" Member="Orders">
+    <Type Name="Order">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderNumber" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="OrderTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="MethodOfPayment_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RestaurantId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Order_OrderDishe" Member="OrderDishes" ThisKey="ID" OtherKey="Order_ID" Type="OrderDishe" />
+      <Association Name="AspNetUser_Order" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="MethodOfPayment_Order" Member="MethodOfPayment" ThisKey="MethodOfPayment_ID" OtherKey="ID" Type="MethodOfPayment" IsForeignKey="true" />
+      <Association Name="Restaurant_Order" Member="Restaurant" ThisKey="RestaurantId" OtherKey="ID" Type="Restaurant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ratings" Member="Ratings">
+    <Type Name="Rating">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="NumberOfStars" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DishId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RestaurantId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Association Name="AspNetUser_Rating" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="Dishe_Rating" Member="Dishe" ThisKey="DishId" OtherKey="ID" Type="Dishe" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Restaurant_Rating" Member="Restaurant" ThisKey="RestaurantId" OtherKey="ID" Type="Restaurant" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Restaurants" Member="Restaurants">
+    <Type Name="Restaurant">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="EmailAddress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Association Name="Restaurant_Address" Member="Address" ThisKey="ID" OtherKey="ID" Type="Address" Cardinality="One" />
+      <Association Name="Restaurant_Dishe" Member="Dishes" ThisKey="ID" OtherKey="RestaurantId" Type="Dishe" />
+      <Association Name="Restaurant_Order" Member="Orders" ThisKey="ID" OtherKey="RestaurantId" Type="Order" />
+      <Association Name="Restaurant_Rating" Member="Ratings" ThisKey="ID" OtherKey="RestaurantId" Type="Rating" />
+      <Association Name="AspNetUser_Restaurant" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

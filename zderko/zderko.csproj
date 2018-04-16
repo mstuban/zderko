@@ -59,12 +59,21 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -189,29 +198,54 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\DishController.cs" />
+    <Compile Include="Controllers\DishDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803261520239_Initial.cs" />
-    <Compile Include="Migrations\201803261520239_Initial.Designer.cs">
-      <DependentUpon>201803261520239_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201804121921256_MethodsOfPayment.cs" />
+    <Compile Include="Migrations\201804121921256_MethodsOfPayment.Designer.cs">
+      <DependentUpon>201804121921256_MethodsOfPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804160842570_UsersAndRoles.cs" />
+    <Compile Include="Migrations\201804160842570_UsersAndRoles.Designer.cs">
+      <DependentUpon>201804160842570_UsersAndRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804160934363_Initial.cs" />
+    <Compile Include="Migrations\201804160934363_Initial.Designer.cs">
+      <DependentUpon>201804160934363_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804161007173_RestaurantsAndDishes.cs" />
+    <Compile Include="Migrations\201804161007173_RestaurantsAndDishes.Designer.cs">
+      <DependentUpon>201804161007173_RestaurantsAndDishes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Dish.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MethodOfPayment.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Rating.cs" />
+    <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\RestaurantFilterModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ZderkoDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\zderko.mdf" />
-    <Content Include="App_Data\zderko_log.ldf">
-      <DependentUpon>zderko.mdf</DependentUpon>
+    <Content Include="App_Data\Zderko.mdf" />
+    <Content Include="App_Data\Zderko_log.ldf">
+      <DependentUpon>Zderko.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -224,6 +258,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -269,11 +306,19 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803261520239_Initial.resx">
-      <DependentUpon>201803261520239_Initial.cs</DependentUpon>
-    </EmbeddedResource>
+    <Content Include="Views\Restaurant\Index.cshtml" />
+    <Content Include="Views\Restaurant\Create.cshtml" />
+    <Content Include="Views\Restaurant\CreateOrEdit.cshtml" />
+    <Content Include="Views\Restaurant\_IndexTable.cshtml" />
+    <Content Include="Views\Restaurant\Edit.cshtml" />
+    <Content Include="Views\Restaurant\Details.cshtml" />
+    <Content Include="Views\Dish\Create.cshtml" />
+    <Content Include="Views\Dish\CreateOrEdit.cshtml" />
+    <Content Include="Views\Dish\Details.cshtml" />
+    <Content Include="Views\Dish\Edit.cshtml" />
+    <Content Include="Views\Dish\Index.cshtml" />
+    <Content Include="Views\Dish\_IndexTable.cshtml" />
+    <Content Include="Views\Restaurant\Dishes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -287,6 +332,23 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804121921256_MethodsOfPayment.resx">
+      <DependentUpon>201804121921256_MethodsOfPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804160842570_UsersAndRoles.resx">
+      <DependentUpon>201804160842570_UsersAndRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804160934363_Initial.resx">
+      <DependentUpon>201804160934363_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804161007173_RestaurantsAndDishes.resx">
+      <DependentUpon>201804161007173_RestaurantsAndDishes.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

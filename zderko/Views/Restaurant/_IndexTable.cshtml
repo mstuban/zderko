@@ -1,0 +1,38 @@
+﻿﻿﻿﻿﻿@model List<zderko.Models.Restaurant>
+@using Microsoft.AspNet.Identity;
+
+<table id="table" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Naziv</th>
+            <th>Adresa</th>
+            <th>Prosječna ocjena</th>
+            @if (User.IsInRole("RESTAURANT_MANAGER") && @Model.Any(r => r.UserId == User.Identity.GetUserId()))
+            {
+
+                <th>Uredi</th>
+                <th>Izbriši</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var restaurant in Model)
+        {
+            <tr data-deleteurl="@Url.Action("Delete", "Restaurant", new { id = restaurant.ID })">
+                <td>@restaurant.ID</td>
+                <td>@Html.ActionLink(restaurant.Name, "Details", new { id = restaurant.ID })</td>
+                <td>@restaurant.Address.City, @restaurant.Address.Street @restaurant.Address.HouseNumber</td>
+                <td>@restaurant.GetAverageRating()</td>
+
+                @if (User.IsInRole("RESTAURANT_MANAGER") && restaurant.UserId == User.Identity.GetUserId())
+                {
+                    <td>@Html.ActionLink("Uredi", "Edit", new { id = restaurant.ID })</td>
+                    <td>
+                        <button type="button" class="btn btn-warning deleteItem" onclick="deleteRestaurant(this)">&times;</button>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

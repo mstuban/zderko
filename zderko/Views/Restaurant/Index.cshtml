@@ -1,0 +1,72 @@
+﻿﻿﻿﻿﻿@model List<zderko.Models.Restaurant>
+
+@{
+    ViewBag.Title = "Restorani";
+}
+
+<br/>
+<span style="display: none;" class="alert alert-danger">Niste vlasnik ovog restorana!</span>
+
+<div class="panel panel-heading">
+    <div class="row">
+        <div class="col-xs-8">
+            <h2>Pregled restorana</h2>
+        </div>
+        <div class="col-xs-4 text-right">
+            <a href="@Url.Action("Create")" style="margin-top: 20px;" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Dodaj novi restoran</a>
+        </div>
+    </div>
+</div>
+
+<div id="filter-wrapper">
+
+</div>
+
+<div id="table-wrapper">
+    @Html.Partial("_IndexTable", Model)
+</div>
+
+@section scripts {
+
+    <style type="text/css">
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $('.close').alert();
+
+        function deleteRestaurant(sender) {
+            var deleteURL = $(sender).closest('tr').data().deleteurl;
+            $.ajax({
+                url: deleteURL,
+                 method: "POST",
+            success: function (result) {
+                if (result.result == "success") {
+                    applyFilter(this);
+                }
+                else {
+                    showAlert();
+                }
+            }
+        });
+    }
+        function applyFilter(sender) {
+            var formSerialized = $(sender).closest('form').serialize();
+
+            $.ajax({
+                url: '@Url.Action("IndexAjax", "Restaurant")',
+                method: "GET",
+                success: function (result) {
+                    $("#table-wrapper").find("table").replaceWith(result);
+                }
+            });
+        }
+
+        function showAlert() {
+            $(".alert").css("display", "block");
+        }
+
+    </script>
+}

@@ -1,0 +1,82 @@
+﻿﻿﻿﻿﻿@model zderko.Models.Restaurant
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Detalji restorana";
+}
+
+<br />
+<br />
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Pregled restorana", "Index")</li>
+    <li class="active">Detalji o restoranu</li>
+</ol>
+
+@if (Model == null)
+{
+    <div class="alert alert-danger" role="alert">Ne postoji odabrani restorana!</div>
+}
+else
+{
+    <h1>@Model.Name</h1>
+    <h4>
+        <i class="glyphicon glyphicon-cutlery"></i>
+        Podaci o restoranu:
+    </h4> <br />
+
+    <div class="row">
+        <ul class="list-group col-md-3">
+            <li class="list-group-item">
+                <i class="glyphicon glyphicon-phone"></i> <b>Telefon:</b> @Model.PhoneNumber<br />
+            </li>
+            <li class="list-group-item">
+                <i class="glyphicon glyphicon-envelope"></i> <b>Email:</b> @Model.EmailAddress<br />
+            </li>
+            <li class="list-group-item">
+                <i class="glyphicon glyphicon-star"></i> <b>Radno vrijeme:</b> @Model.HourOfDayFrom - @Model.HourOfDayTo<br />
+            </li>
+            <li class="list-group-item">
+                <i class="glyphicon glyphicon-star"></i> <b>Prosječna ocjena:</b> @Model.GetAverageRating()<br />
+            </li>
+        </ul>
+        <well class="col-md-3">
+            <a href='@Url.Action("Dishes", "Restaurant", new { id = @Model.ID })'>
+                <button class="btn btn-primary"><i class="glyphicon glyphicon-cutlery"></i> Ponuda jela</button>
+            </a>
+            <br/>
+            <br/>
+            @if (User.IsInRole("RESTAURANT_MANAGER") && @Model.UserId == User.Identity.GetUserId())
+    {
+        <a href='@Url.Action("Edit", "Dish", new { id = @Model.ID })'>
+            <button class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i> Uredi</button>
+        </a>
+}
+        </well>
+    </div>
+
+    <h4>
+        <i class="glyphicon glyphicon-home"></i>
+        Podaci o adresi:
+    </h4> <br />
+    <div class="row">
+        <ul class="list-group col-md-3">
+            <li class="list-group-item">
+                <b>Ime adrese:</b> @Model.Address.Name<br />
+            </li>
+            <li class="list-group-item">
+                <b>Grad:</b> @Model.Address.City<br />
+            </li>
+            <li class="list-group-item">
+                <b>Ulica:</b> @Model.Address.Street<br />
+            </li>
+            <li class="list-group-item">
+                <b>Kućni broj:</b> @Model.Address.HouseNumber<br />
+            </li>
+        </ul>
+    </div>
+
+
+    <b>Vlasnik:</b> @Model.User.NameAndSurname<br />
+}

@@ -1,0 +1,50 @@
+﻿﻿﻿﻿﻿@model List<zderko.Models.Dish>
+@{
+    ViewBag.Title = "Jela restorana";
+}
+
+@if (Model == null)
+{
+    <div class="alert alert-danger" role="alert">Ne postoji taj restoran!</div>
+}
+else
+{
+    if (Model.Count() > 0)
+    {
+
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li>@Html.ActionLink("Detalji restorana", "Details", new { id = Model.ElementAt(0).RestaurantId })</li>
+            <li class="active">Jela restorana</li>
+        </ol>
+
+        <h4>
+            <i class="glyphicon glyphicon-cutlery"></i>
+            Jela:
+        </h4> <br />
+        <div class="row">
+            <ul class="list-group col-md-4">
+                @foreach (var dish in Model)
+                {
+                    <li class="list-group-item row">
+                        <div class="col-md-6">
+                            <b>Naziv:</b> @dish.Name<br />
+                            <b>Cijena:</b> @dish.Price <br />
+                        </div>
+                        <div class="col-md-6">
+                            <well>
+                                <button id="addToCartButton" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Dodaj u košaricu</button>
+                            </well>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <br />
+        <br />
+        <div class="alert alert-danger" role="alert">Ovaj restoran još nema ništa za ponuditi! Sramota!</div>
+    }
+}

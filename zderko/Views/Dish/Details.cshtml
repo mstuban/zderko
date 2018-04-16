@@ -1,0 +1,55 @@
+﻿﻿﻿﻿﻿@model zderko.Models.Dish
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Detalji restorana";
+}
+
+<br />
+<br />
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Pregled restorana", "Index")</li>
+    <li class="active">Detalji o restoranu</li>
+</ol>
+
+<h1>@Model.Name</h1>
+@if (Model == null)
+{
+    <div class="alert alert-danger" role="alert">Ne postoji odabrano jelo!</div>
+}
+else
+{
+    <h4>
+        <i class="glyphicon glyphicon-cutlery"></i>
+        Podaci o jelu:
+    </h4> <br />
+
+    <div class="row">
+        <ul class="list-group col-md-3">
+            <li class="list-group-item">
+                <i class="glyphicon glyphicon-pencil"></i> <b>Opis:</b> @Model.Description<br />
+            </li>
+            <li class="list-group-item">
+                <i class="glyphicon glyphicon-phone"></i> <b>Cijena:</b> @Model.Price<br />
+            </li>
+            <li class="list-group-item">
+                <i class="glyphicon glyphicon-star"></i> <b>Prosječna ocjena:</b> @Model.GetAverageRating()<br />
+            </li>
+            <li class="list-group-item">
+                <i class="glyphicon glyphicon-cutlery"></i> <b>Restoran:</b> @Model.Restaurant.Name<br />
+            </li>
+        </ul>
+        <well class="col-md-3">
+            <button class="btn btn-primary" onclick="addToCart(@Model.Restaurant.ID, @Model.ID)"><i class="glyphicon glyphicon-plus"></i> Dodaj u košaricu</button>
+            <br />
+            <br />
+            @if (User.IsInRole("RESTAURANT_MANAGER") && @Model.Restaurant.UserId == User.Identity.GetUserId())
+    {
+        <a href='@Url.Action("Edit", "Dish", new { id = @Model.ID })'>
+            <button class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i> Uredi</button>
+        </a>
+}
+        </well>
+    </div>
+}

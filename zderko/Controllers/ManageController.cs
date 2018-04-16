@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Vjezba.Web.Controllers;
 using zderko.Models;
+using System.Web.Security;
 
 namespace zderko.Controllers
 {
@@ -71,7 +72,8 @@ namespace zderko.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Roles =  Roles.GetRolesForUser()
             };
             return View(model);
         }

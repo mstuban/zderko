@@ -1,0 +1,82 @@
+﻿﻿﻿﻿﻿@model List<zderko.Models.Dish>
+
+@{
+    ViewBag.Title = "Jela";
+}
+
+<br />
+<span style="display: none;" class="alert alert-danger">Niste vlasnik restorana kojem pripada ovo jelo!</span>
+
+<div class="panel panel-heading">
+    <div class="row">
+        <div class="col-xs-8">
+            <h2>Pregled jela</h2>
+        </div>
+        <div class="col-xs-4 text-right">
+            <a href="@Url.Action("Create")" style="margin-top: 20px;" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Dodaj novo jelo za svoj restoran</a>
+        </div>
+    </div>
+</div>
+
+<div id="filter-wrapper">
+
+</div>
+
+<div id="table-wrapper">
+    @Html.Partial("_IndexTable", Model)
+</div>
+
+@section scripts {
+
+    <style type="text/css">
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        function deleteDish(sender) {
+            var deleteURL = $(sender).closest('tr').data().deleteurl;
+            $.ajax({
+                url: deleteURL,
+                 method: "POST",
+            success: function (result) {
+                if (result.result == "success") {
+                    applyFilter(this);
+                }
+                else {
+                    showAlert();
+                }
+            }
+        });
+        }
+
+            function applyFilter(sender) {
+
+            $.ajax({
+                url: '@Url.Action("IndexAjax", "Dish")',
+                method: "GET",
+                success: function (result) {
+                    $("#table-wrapper").find("table").replaceWith(result);
+                }
+            })
+        }
+
+            function addToCart(restaurantId, dishId) {
+
+            $.ajax({
+                url: '@User.Identity.Name/AddToCart/' + restaurantId + '/' + dishId,
+                method: "POST",
+                success: function (result) {
+                    console.log("item added to cart");
+                }
+            })
+        }
+
+            function showAlert() {
+                $(".alert").css("display", "block");
+            }
+
+    </script>
+}

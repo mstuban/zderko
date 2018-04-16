@@ -21,15 +21,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Početna", "Index", "Home")</li>
                     <li>@Html.ActionLink("O nama", "About", "Home")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Restorani", "Index", "Restaurant")</li>
+                    <li>@Html.ActionLink("Jela", "Index", "Dish")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
+        <br />
+        <br />
         @RenderBody()
         <hr />
         <footer>

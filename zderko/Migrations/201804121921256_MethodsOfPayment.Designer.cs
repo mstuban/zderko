@@ -7,13 +7,13 @@ namespace zderko.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class MethodsOfPayment : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(MethodsOfPayment));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803261520239_Initial"; }
+            get { return "201804121921256_MethodsOfPayment"; }
         }
         
         string IMigrationMetadata.Source
